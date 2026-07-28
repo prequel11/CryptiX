@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+cryptix.db
+flux_engine.dll
