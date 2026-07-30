@@ -65,7 +65,7 @@ def calculate_shannon_entropy(data: bytes) -> float:
 def home():
     return {"message": "CryptiX Backend Powered by FLUX Engine"}
 
-@app.get("/generate key")
+@app.get("/generate-key")
 def generate_key(length: int = 32):
     byte_length = length // 2
 
@@ -92,7 +92,7 @@ def generate_key(length: int = 32):
         "engine": "FLUX DLL" if flux_engine else "Python Failsafe"
     }
 
-@app.get("/validate_key")
+@app.get("/validate-key")
 def validate_key(user_key: str):
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.execute("SELECT status FROM keys WHERE key = ?", (user_key,))
@@ -108,7 +108,7 @@ def validate_key(user_key: str):
         else:
             return {"status": "already used"}
 
-@app.get("/audit_system")
+@app.get("/audit-system")
 def audit_system(test_size_bytes: int = 10000):
     """Pulls a large sample from the FLUX Engine to mathematically prove randomness."""
 
