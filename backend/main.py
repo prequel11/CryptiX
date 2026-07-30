@@ -23,7 +23,7 @@ init_db()
 
 # Load FLUX ENGINE (C DLL)
 flux_engine = None
-dll_path = os.path.abspath("flux_engine.dll")
+dll_path = os.path.abspath("engine/flux_engine.dll")
 if os.path.exists(dll_path):
     flux_engine = ctypes.CDLL(dll_path)
 else:
