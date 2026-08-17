@@ -105,13 +105,6 @@ pytest
 
 ---
 
-## 👨‍💻 Author
-
-Avinash A
-Computer Science Engineering Student
-
----
-
 ## 📜 License
 
 Distributed under the MIT License.
