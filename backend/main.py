@@ -5,6 +5,7 @@ import textwrap
 import secrets
 import sqlite3
 import math
+import sys
 import os
 
 app = FastAPI()
@@ -23,15 +24,25 @@ init_db()
 
 # Load FLUX ENGINE (C DLL)
 flux_engine = None
+
+if sys.platform == "win32":
+    binary_name = "flux_engine.dll"
+
+else:
+    binary_name = "flux_engine.so"
+
 dll_path = os.path.abspath("engine/flux_engine.dll")
+
 if os.path.exists(dll_path):
     flux_engine = ctypes.CDLL(dll_path)
+
 else:
-    print("Warning: flux_engine.dll not found. Using native Python fallback")
+    print(f"Warning: {binary_name} not found. Using native Python fallback")
 
 # Entropy Generation
 def get_secure_entropy(byte_length: int) -> bytes:
     if flux_engine:
+
         try:
             buffer = ctypes.create_string_buffer(byte_length)
             if flux_engine.get_os_entropy(buffer, byte_length) == 1:
